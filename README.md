@@ -71,13 +71,14 @@ streamlit run app.py
 Open http://localhost:8501 in your browser.
 
 ### 🛠️ Tech Stack
-| Tool |	Purpose |
-| Streamlit |	UI  for real-time Q&A |
-| LangChain |	Memory and document QA chain |
-| FAISS|	Fast vector similarity search |
-| HuggingFace| Embeddings	Convert text into embeddings| 
-| Groq| LLaMA 3 API	Powerful LLM backend |
-| PyPDFLoader|	Parse and load PDF documents |
+| Tool | Purpose |
+|------|---------|
+| Streamlit | UI for real-time Q&A |
+| LangChain | Memory and document QA chain |
+| FAISS | Fast vector similarity search |
+| HuggingFace | Convert text into embeddings |
+| Groq | LLaMA 3 API - Powerful LLM backend |
+| PyPDFLoader | Parse and load PDF documents |
 
 
 ### 🧠 How It Works

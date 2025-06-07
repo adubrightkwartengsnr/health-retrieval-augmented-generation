@@ -61,9 +61,13 @@ GROQ_API_KEY=your_groq_api_key_here
 ### 5. Add your documents
 Place relevant PDF files (e.g., stroke-related medical literature) in the data/ folder.
 
-```bash
+
 🏃 Run the App
+
+```bash
 streamlit run app.py
+
+```
 Open http://localhost:8501 in your browser.
 
 🛠️ Tech Stack
@@ -101,5 +105,3 @@ MIT License. Feel free to use, modify, and share.
 Developed by Bright Kwarteng Senior Adu
 📧 [adubrightkwarrteng11@gmail.com]
 🔗 https://www.linkedin.com/in/bright-adu-kwarteng-snr/
-
-```

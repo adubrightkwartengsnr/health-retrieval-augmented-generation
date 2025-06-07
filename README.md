@@ -44,6 +44,7 @@ git clone https://github.com/adubrightkwartengsnr/health-retrieval-augmented-gen
 cd health-retrieval-augmented-generation
 ```
 
+
 ### 2. Create and activate a virtual environment
 conda create -n rag-env python=3.10 -y
 conda activate rag-env
@@ -60,6 +61,7 @@ GROQ_API_KEY=your_groq_api_key_here
 ### 5. Add your documents
 Place relevant PDF files (e.g., stroke-related medical literature) in the data/ folder.
 
+```bash
 🏃 Run the App
 streamlit run app.py
 Open http://localhost:8501 in your browser.
@@ -100,3 +102,4 @@ Developed by Bright Kwarteng Senior Adu
 📧 [adubrightkwarrteng11@gmail.com]
 🔗 https://www.linkedin.com/in/bright-adu-kwarteng-snr/
 
+```

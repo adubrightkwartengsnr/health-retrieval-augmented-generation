@@ -42,6 +42,7 @@ The AI will search the uploaded stroke-related documents and provide relevant, c
 ```bash
 git clone https://github.com/adubrightkwartengsnr/health-retrieval-augmented-generation.git
 cd health-retrieval-augmented-generation
+```
 
 ### 2. Create and activate a virtual environment
 conda create -n rag-env python=3.10 -y

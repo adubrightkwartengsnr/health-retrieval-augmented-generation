@@ -43,20 +43,20 @@ The AI will search the uploaded stroke-related documents and provide relevant, c
 git clone https://github.com/adubrightkwartengsnr/health-retrieval-augmented-generation.git
 cd health-retrieval-augmented-generation
 
-2. Create and activate a virtual environment
+### 2. Create and activate a virtual environment
 conda create -n rag-env python=3.10 -y
 conda activate rag-env
 
 
-3. Install dependencies
+### 3. Install dependencies
 pip install -r requirements.txt
 
-4. Add your API key
+### 4. Add your API key
 Create a .env file in the root directory:
 GROQ_API_KEY=your_groq_api_key_here
 🔐 Sign up for a Groq API key at https://console.groq.com/
 
-5. Add your documents
+### 5. Add your documents
 Place relevant PDF files (e.g., stroke-related medical literature) in the data/ folder.
 
 🏃 Run the App
@@ -64,13 +64,13 @@ streamlit run app.py
 Open http://localhost:8501 in your browser.
 
 🛠️ Tech Stack
-Tool |	Purpose
-Streamlit |	UI  for real-time Q&A
-LangChain |	Memory and document QA chain
-FAISS|	Fast vector similarity search
-HuggingFace| Embeddings	Convert text into embeddings
-Groq| LLaMA 3 API	Powerful LLM backend
-PyPDFLoader|	Parse and load PDF documents
+| Tool |	Purpose |
+| Streamlit |	UI  for real-time Q&A |
+| LangChain |	Memory and document QA chain |
+| FAISS|	Fast vector similarity search |
+| HuggingFace| Embeddings	Convert text into embeddings| 
+| Groq| LLaMA 3 API	Powerful LLM backend |
+| PyPDFLoader|	Parse and load PDF documents |
 
 
 🧠 How It Works

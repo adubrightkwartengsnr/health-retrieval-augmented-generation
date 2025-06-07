@@ -70,7 +70,7 @@ streamlit run app.py
 ```
 Open http://localhost:8501 in your browser.
 
-🛠️ Tech Stack
+### 🛠️ Tech Stack
 | Tool |	Purpose |
 | Streamlit |	UI  for real-time Q&A |
 | LangChain |	Memory and document QA chain |
@@ -80,28 +80,28 @@ Open http://localhost:8501 in your browser.
 | PyPDFLoader|	Parse and load PDF documents |
 
 
-🧠 How It Works
+### 🧠 How It Works
 PDFs are loaded and split into text chunks.
 Chunks are embedded using sentence-transformers/all-MiniLM-L6-v2.
 FAISS indexes the chunks for fast retrieval.
 A conversational chain retrieves top chunks and queries the LLaMA model.
 User conversation is tracked using ConversationBufferMemory.
 
-🐛 Known Issues
+### 🐛 Known Issues
 If running on lower-spec machines, embeddings and FAISS may take time to load.
 Warnings related to torch.classes during startup can be ignored (Streamlit internal behavior).
 Replace .run() with .invoke() in the LangChain chain to avoid deprecation warnings.
 
 
-📌 To-Do / Future Work
+### 📌 To-Do / Future Work
 ⬜ Enable document upload from the UI
 ⬜ Add multi-turn memory persistence (beyond session state)
 ⬜ Deploy on Streamlit Cloud or Hugging Face Spaces
 
-📜 License
+### 📜 License
 MIT License. Feel free to use, modify, and share.
 
-🙋‍♂️ Contact
+### 🙋‍♂️ Contact
 Developed by Bright Kwarteng Senior Adu
 📧 [adubrightkwarrteng11@gmail.com]
 🔗 https://www.linkedin.com/in/bright-adu-kwarteng-snr/

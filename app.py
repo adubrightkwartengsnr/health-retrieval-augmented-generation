@@ -20,6 +20,14 @@ groq_api_key = os.getenv("GROQ_API_KEY")
 st.set_page_config(page_title="Ask your DigiDoctor👨‍⚕️", layout="wide")
 st.title("Ask your DigiDoctor👨‍⚕️")
 
+with st.sidebar:
+    st.selectbox("Select a model", options=["Llama 3.3 70B Versatile","gemma2-9b-it"], key="model_select")
+    st.slider("Temperature", min_value=0.0, max_value=1.0, value=0.1, step=0.1, key="temperature_slider")
+    st.slider("Top P", min_value=0.0, max_value=1.0, value=0.9, step=0.1, key="top_p_slider")
+    st.slider("Top K", min_value=0, max_value=100, value=50, step=1, key="top_k_slider")
+    st.slider("Max Tokens", min_value=100, max_value=2000, value=1000, step=100, key="max_tokens_slider")
+
+
 # Cache and load documents, chunks, vectorstore
 @st.cache_resource
 def load_vector_store():
@@ -41,14 +49,30 @@ def load_vector_store():
 
 vector_store = load_vector_store()
 
-# Initialize Grog LLM(Langchain)
-llm = ChatGroq(
+# Initialize Grog LLM(Langchain) 
+llama_model = ChatGroq(
     api_key=groq_api_key,
-    model="llama-3.3-70b-versatile",
-    temperature=0.5,
-    max_tokens=2000,
+    model="llama-3.3-70b-versatile"
 
 )
+
+gemma_model = ChatGroq(
+    api_key=groq_api_key,
+    model="gemma2-9b-it",
+)
+# Select model based on user input
+if st.session_state.get("model_select") == "Llama 3.3 70B Versatile":
+    llm = llama_model
+    st.session_state.temperature = st.session_state.get("temperature_slider")
+    st.session_state.top_p = st.session_state.get("top_p_slider")
+    st.session_state.top_k = st.session_state.get("top_k_slider")
+    st.session_state.max_tokens = st.session_state.get("max_tokens_slider")
+else:
+    llm = gemma_model
+    st.session_state.temperature = st.session_state.get("temperature_slider")
+    st.session_state.top_p = st.session_state.get("top_p_slider")
+    st.session_state.top_k = st.session_state.get("top_k_slider")
+    st.session_state.max_tokens = st.session_state.get("max_tokens_slider")
 
 # Set up memory and retriever chain
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
@@ -65,7 +89,7 @@ if "messages" not in st.session_state:
     st.session_state.messages = []
 
 # Take Input Query from User
-query_input = st.text_input("Ask your questions about stroke: ", key="input")
+query_input = st.chat_input("Ask your questions about stroke: ", key="input")
 
 # Handle User Query
 if query_input:

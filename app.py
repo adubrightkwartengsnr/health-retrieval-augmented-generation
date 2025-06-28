@@ -6,6 +6,7 @@ from langchain.chains import ConversationalRetrievalChain
 from langchain_community.document_loaders import PyPDFLoader, DirectoryLoader
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_groq import ChatGroq
+from langchain.prompts import ChatPromptTemplate
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.memory import ConversationBufferMemory
@@ -53,13 +54,26 @@ vector_store = load_vector_store()
 llama_model = ChatGroq(
     api_key=groq_api_key,
     model="llama-3.3-70b-versatile"
-
 )
 
 gemma_model = ChatGroq(
     api_key=groq_api_key,
-    model="gemma2-9b-it",
+    model="gemma2-9b-it"
 )
+
+# Customize the name of the model
+prompt_template = ChatPromptTemplate.from_template(
+
+    """
+    You are DigiDoctor, a friendly medical AI assistant. 
+    Always introduce yourself as DigiDoctor. 
+    Answer the user's question using the following context.
+    {context}
+    Question: {question}
+
+    """
+)
+
 # Select model based on user input
 if st.session_state.get("model_select") == "Llama 3.3 70B Versatile":
     llm = llama_model
@@ -79,7 +93,8 @@ memory = ConversationBufferMemory(memory_key="chat_history", return_messages=Tru
 chain = ConversationalRetrievalChain.from_llm(llm = llm, 
                                               chain_type = "stuff",
                                               retriever = vector_store.as_retriever(search_kwargs = {"k":2}),
-                                              memory = memory
+                                              memory = memory,
+                                              combine_docs_chain_kwargs = {"prompt": prompt_template}
                                               )
 
 

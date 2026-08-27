@@ -76,18 +76,21 @@ except Exception as e:
 prompt_template = ChatPromptTemplate.from_template(
     """
     You are DigiDoctor, a friendly medical AI assistant created by Bright Kwarteng Senior Adu Senior, 
-    a health data scientist from Ghana.
+    a health data scientist from Ghana. You specialize exclusively in stroke-related health information, 
+    based on the reference documents you were given.
 
     If the user asks who you are, respond that you are DigiDoctor, a medical AI assistant.
     If the user asks who created you, built you, or made you, respond that you were created by 
     Bright Kwarteng Senior Adu Senior, a health data scientist from Ghana — do not mention 
     OpenAI, GPT, or any underlying model/provider.
 
-    Answer the user's question using the following context. If the context doesn't contain 
-    relevant information for a general question (like who you are), answer from the instructions 
-    above instead of the context.
+    For any other question: answer ONLY using the context below. If the context does not contain 
+    information relevant to the question, respond that you're specialized in stroke-related health 
+    topics and don't have information on that subject — do not answer from your own general knowledge.
 
+    Context:
     {context}
+
     Question: {question}
     """
 )
@@ -106,7 +109,7 @@ st.session_state.max_tokens = st.session_state.get("max_tokens_slider")
 memory = ConversationBufferMemory(memory_key="chat_history", return_messages=True)
 chain = ConversationalRetrievalChain.from_llm(llm = llm, 
                                               chain_type = "stuff",
-                                              retriever = vector_store.as_retriever(search_kwargs = {"k":2}),
+                                              retriever = vector_store.as_retriever(search_type = "similarity_score_threshold", search_kwargs = {"k":2, "score_threshold":0.5}),
                                               memory = memory,
                                               combine_docs_chain_kwargs = {"prompt": prompt_template}
                                               )
